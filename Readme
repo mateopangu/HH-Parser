@@ -1,0 +1,172 @@
+An automated workflow for collecting job vacancies from HH.ru, extracting full descriptions, classifying salaries, and analyzing vacancies with AI.
+
+The workflow uses n8n, Apify Actors, and AI agents to turn raw job listings into structured data and identify the most promising opportunities.
+
+## Features
+
+- **Keyword-based search** — configure the search keyword and number of pages to scrape.
+- **Two-stage scraping** — collect vacancy links and short descriptions first, then retrieve full vacancy descriptions.
+- **Salary classification** — automatically divide vacancies into three categories:
+  - Salary above 150 000
+  - Salary below 150 000
+  - Salary not specified
+- **Currency conversion** — supports salary processing and conversion for USD, UZS (Uzbekistani som), and KZT (Kazakhstani tenge).
+- **AI-powered analysis** — three AI agents analyze vacancies according to their salary categories.
+- **Telegram notifications** — Agent 1 sends the best vacancies to a Telegram bot.
+- **Centralized storage** — collected data and analysis results are saved in n8n Data Tables.
+
+## Workflow Architecture
+
+### 1. Search Configuration — Edit Fields
+
+Set the input parameters:
+
+- `keyword` — the job search keyword.
+- `maxPages` — the number of search result pages to process.
+
+### 2. Actor 1 — Initial Vacancy Scraper (`actor1/`)
+
+Collects initial vacancy data from HH.ru, including:
+
+- Vacancy title
+- Vacancy URL
+- Short description
+
+### 3. Actor 2 — Full Description Scraper (`actor2/`)
+
+Processes the collected vacancy links and retrieves full vacancy descriptions for further analysis.
+
+### 4. Salary Classification — IF Node
+
+The workflow distributes vacancies into three categories based on salary information:
+
+- **Category 1:** Salary above 150 000
+- **Category 2:** Salary below 150 000
+- **Category 3:** Salary not specified
+
+Salary values in USD, UZS, and KZT are converted to a common basis for comparison.
+
+> Note: The salary threshold of 150 000 depends on the configured reference currency and normalization logic. Verify the workflow settings before running it.
+
+### 5. AI Analysis Agents
+
+Each agent analyzes vacancies from its assigned category.
+
+| Agent | Input | Purpose |
+|---|---|---|
+| Agent 1 | Category 1 | Analyze vacancies with salaries above the threshold and identify the best opportunities |
+| Agent 2 | Category 2 | Analyze vacancies with salaries below the threshold |
+| Agent 3 | Category 3 | Analyze vacancies without a specified salary |
+
+The analysis criteria depend on the prompts and model configuration used in each AI agent.
+
+### 6. Data Storage — DATA
+
+Vacancy records and analysis results are stored in n8n Data Tables.
+
+You can also configure Google Sheets as an alternative storage solution.
+
+### 7. Telegram Notifications
+
+Agent 1 sends selected top vacancies to a Telegram bot.
+
+Telegram integration is optional. The workflow can be adapted to store results without sending notifications.
+
+## Requirements
+
+- **n8n** — workflow automation platform.
+- **Apify account and API token** — to run the scraping Actors.
+- **AI model/API** — any compatible AI provider; a locally hosted model can also be used if supported by the configured integration.
+- **Storage** — n8n Data Tables or Google Sheets.
+- **Telegram bot** — optional, for notifications.
+
+## Installation & Setup
+
+### Step 1 — Import the workflow
+
+1. Download the workflow JSON file from this repository.
+2. Open your n8n instance.
+3. Import the JSON workflow.
+4. Review the nodes and configure any missing credentials.
+
+### Step 2 — Configure Apify
+
+1. Open your Apify account.
+2. Deploy or configure Actor 1 using the code in `actor1/`.
+3. Deploy or configure Actor 2 using the code in `actor2/`.
+4. Add your Apify API token to the appropriate n8n credentials or HTTP Request nodes.
+5. Verify the Actor IDs and input parameters used by the workflow.
+
+### Step 3 — Configure the AI agents
+
+1. Connect your preferred AI provider.
+2. Add the required credentials.
+3. Select the appropriate model for each agent.
+4. Review the system prompts and adjust the analysis criteria to your needs.
+
+### Step 4 — Configure data storage
+
+Choose one of the following:
+
+- **n8n Data Tables:** create the required tables and configure the corresponding nodes.
+- **Google Sheets:** connect your Google account, create a spreadsheet, and map the workflow fields to the appropriate columns.
+
+Make sure the required tables or spreadsheets exist before running the workflow.
+
+### Step 5 — Configure Telegram (optional)
+
+1. Create a bot using Telegram's BotFather.
+2. Obtain the bot token.
+3. Configure Telegram credentials in n8n.
+4. Set the destination chat ID.
+5. Test the notification node.
+
+Never publish your bot token or other credentials in the repository.
+
+### Step 6 — Run the workflow
+
+1. Open the **Edit Fields** node.
+2. Enter your search keyword.
+3. Set the number of pages to process.
+4. Execute the workflow.
+5. Check the execution results, stored data, AI analysis, and optional Telegram notifications.
+
+## Repository Structure
+
+```text
+.
+├── README.md
+├── actor1/
+│   └── Actor 1 source files
+├── actor2/
+│   └── Actor 2 source files
+└── workflow.json
+```
+
+The actual workflow filename and Actor file structure may differ depending on your repository.
+
+## Customization
+
+You can adapt the workflow to:
+
+- Search for different job titles and technologies.
+- Change the salary threshold.
+- Add other currencies.
+- Modify AI prompts and evaluation criteria.
+- Add new vacancy categories.
+- Connect a database or external storage service.
+- Change Telegram notification rules.
+- Extend the workflow with additional processing steps.
+
+## Important Notes
+
+- Scraping results depend on HH.ru page structure and availability.
+- Large scraping jobs may take longer and consume more Apify resources.
+- AI analysis quality depends on the selected model and prompts.
+- Currency conversion requires a consistent reference currency and reliable exchange rates.
+- Respect HH.ru's terms, applicable laws, and reasonable request limits.
+- Review the workflow and Actor code before running them with your own credentials.
+
+## License
+
+Add a license file to specify how others may use, modify, and distribute this project.
