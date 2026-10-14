@@ -1,0 +1,1209 @@
+{
+  "name": "HH",
+  "nodes": [
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_N8N_DATA_TABLE_ID",
+          "mode": "list",
+          "cachedResultName": "HH_Vacancies",
+          "cachedResultUrl": "/projects/REPLACE_WITH_N8N_PROJECT_ID/datatables/REPLACE_WITH_N8N_DATA_TABLE_ID"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "title": "={{ $json.title }}",
+            "url": "={{ $json.url }}",
+            "scrapedAt": "={{ $json.scrapedAt }}",
+            "description": "={{ $json.description }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "scrapedAt",
+              "displayName": "scrapedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1392,
+        -80
+      ],
+      "id": "de867bb2-3413-4701-a500-2bf99f0aa59a",
+      "name": "Data Table"
+    },
+    {
+      "parameters": {
+        "actorId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "REPLACE_WITH_KLERK_ACTOR_ID"
+        },
+        "customBody": "={{ $json }}",
+        "timeout": 300,
+        "memory": 8192
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        80
+      ],
+      "id": "0818b014-32a4-4476-bd54-2de16851ad5b",
+      "name": "Klerk",
+      "credentials": {
+        "apifyApi": {
+          "id": null,
+          "name": "Apify account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1616,
+        -272
+      ],
+      "id": "31a90c2d-fe05-4810-b8a6-0dad6fe215e6",
+      "name": "Run"
+    },
+    {
+      "parameters": {
+        "resource": "Datasets",
+        "datasetId": "={{ $json.defaultDatasetId }}",
+        "offset": {},
+        "limit": 500,
+        "options": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        -272
+      ],
+      "id": "85660754-8715-4851-b855-7e8f8f1e27d5",
+      "name": "Johan Data",
+      "credentials": {
+        "apifyApi": {
+          "id": null,
+          "name": "Apify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "Datasets",
+        "datasetId": "={{ $json.defaultDatasetId }}",
+        "offset": {},
+        "limit": 500,
+        "options": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        32
+      ],
+      "id": "1fbbe795-edae-46db-9a61-9b9f5decc869",
+      "name": "Klerk Data",
+      "credentials": {
+        "apifyApi": {
+          "id": null,
+          "name": "Apify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "YOUR_GOOGLE_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REPLACE_WITH_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "YOUR_SHEET_TAB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REPLACE_WITH_GOOGLE_SHEET_ID/edit#gid=REPLACE_WITH_GID"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "salary",
+              "displayName": "salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "seniority",
+              "displayName": "seniority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "key_skills",
+              "displayName": "key_skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pros",
+              "displayName": "pros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cons",
+              "displayName": "cons",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ai_score",
+              "displayName": "ai_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        272,
+        -128
+      ],
+      "id": "10580c05-48b4-4582-bc86-d0e5fc4894f7",
+      "name": "Low",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": null,
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "YOUR_GOOGLE_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REPLACE_WITH_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "YOUR_SHEET_TAB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REPLACE_WITH_GOOGLE_SHEET_ID/edit#gid=REPLACE_WITH_GID"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        320,
+        304
+      ],
+      "id": "03c72981-61a9-4a49-833b-22c44169b7b5",
+      "name": "NoInfo"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Проанализируй эту вакансию:\nНазвание: {{ $json.title }}\nКомпания: {{ $json.company }}\nЗарплата: {{ $json.salary }}\nОписание: {{ $json.description }}",
+        "options": {
+          "systemMessage": "Ты — профессиональный IT-рекрутер и технический фильтр. Твоя задача — проанализировать текст вакансии, оценить её адекватность, определить стек технологий, уровень позиции (Junior/Middle/Senior) и выдать краткое заключение, стоит ли на неё откликаться.\n\nНа вход ты получаешь JSON с данными вакансии.\nВерни ответ строго в формате JSON (без лишнего текста, без маркдаун-оберток вроде ```json, просто чистый JSON-объект) со следующими полями:\nis_relevant: true или false (релевантна ли вакансия для нормального разработчика, нет ли подвоха/спама).\nseniority: уровень позиции (Junior, Middle, Senior, Lead, Unknown).\nkey_skills: массив основных технологий, упомянутых в тексте (например, [\"Node.js\", \"Docker\", \"n8n\"]).\npros: краткие плюсы вакансии (1 предложение на русском).\ncons: скрытые риски или минусы (1 предложение на русском).\nai_score: твоя оценка вакансии от 1 до 10."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -320,
+        -768
+      ],
+      "id": "360e3b78-ea04-4d54-9fba-5efcb8d3e392",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        -464
+      ],
+      "id": "01bd3486-89c0-4596-b39f-0481a15f9393",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "YOUR_GOOGLE_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REPLACE_WITH_GOOGLE_SHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "YOUR_SHEET_TAB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REPLACE_WITH_GOOGLE_SHEET_ID/edit#gid=REPLACE_WITH_GID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "url": "={{ $json.url }}",
+            "company": "={{ $json.company }}",
+            "salary": "={{ $json.salary }}",
+            "key_skills": "={{ $json.key_skills }}",
+            "pros": "={{ $json.pros }}",
+            "ai_score": "={{ $json.ai_score }}",
+            "seniority": "={{ $json.seniority }}",
+            "cons": "={{ $json.cons }}",
+            "title": "={{ $json.title }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "salary",
+              "displayName": "salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ai_score",
+              "displayName": "ai_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "key_skills",
+              "displayName": "key_skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "seniority",
+              "displayName": "seniority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pros",
+              "displayName": "pros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cons",
+              "displayName": "cons",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        -480
+      ],
+      "id": "98fa341b-e463-4649-a643-7cd14ddf0736",
+      "name": "TOP",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": null,
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "67f87d5f-0443-4388-8f67-4c767d538bf5",
+              "leftValue": "={{ \n  (() => {\n    const text = String($json.salary || '').toLowerCase().replace(/\\s+/g, '');\n    if (!text || text.includes('неуказана')) return 'no';\n    const matches = text.match(/\\d+/g);\n    return matches ? 'yes' : 'no';\n  })()\n}}",
+              "rightValue": "yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -528,
+        144
+      ],
+      "id": "80836dca-8687-46be-b850-cdaa5141b163",
+      "name": "OR"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "db38c75f-68b7-4426-80d3-63a34a652b60",
+              "leftValue": "={{ \n  (() => {\n    let text = String($json.salary || '').toLowerCase().replace(/\\s+/g, '');\n    if (!text || text.includes('неуказана')) return 0;\n    \n    // Определяем валюты\n    const isUSD = text.includes('$') || text.includes('usd') || text.includes('доллар');\n    const isKZT = text.includes('₸') || text.includes('тенге') || text.includes('kzt');\n    const isUZS = text.includes('so\\'m') || text.includes('сум') || text.includes('uzs');\n\n    // Если написано что-то вроде \"1.5тыс\", \"1500$\", \"500к\" и т.д.\n    if (text.includes('тыс') || text.includes('к') || isUSD || isKZT || isUZS) {\n      const match = text.match(/[\\d.,]+/);\n      if (match) {\n        let num = parseFloat(match[0].replace(',', '.'));\n        let baseNum = num < 1000 ? num * 1000 : num;\n        \n        // Конвертация по валютам в рубли:\n        if (isUSD) return baseNum * 95;           // Курс доллара\n        if (isKZT) return baseNum / 5.2;          // Курс тенге (примерно 5.2 тенге за 1 рубль)\n        if (isUZS) return baseNum * 0.007;        // Курс сума (примерно 0.007 рубля за 1 сум)\n        return baseNum;                           // Рубли по умолчанию\n      }\n    }\n\n    const matches = text.match(/\\d+/g);\n    if (!matches) return 0;\n    \n    let maxSalary = Math.max(...matches.map(Number));\n\n    // Валютная конвертация для обычных цифровых диапазонов без явных букв\n    if (isUSD || (maxSalary >= 300 && maxSalary <= 10000)) {\n      return maxSalary * 95;\n    }\n    if (isKZT) {\n      return maxSalary / 5.2;\n    }\n    if (isUZS) {\n      return maxSalary * 0.007;\n    }\n\n    return maxSalary;\n  })()\n}}",
+              "rightValue": 101000,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -672,
+        -112
+      ],
+      "id": "ae2b0521-9ca6-443a-a28f-d101a92ccb35",
+      "name": "IF"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "876e586b-337a-4723-a610-a068ca89ebef",
+              "name": "query",
+              "value": "AI Automation",
+              "type": "string"
+            },
+            {
+              "id": "7613f1e6-6635-4240-ab9e-5be99cb31612",
+              "name": "pages",
+              "value": "200",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -1408,
+        -272
+      ],
+      "id": "5596a630-7fa6-4cc3-a20c-3e2149251e49",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const outputItems = [];\n\nconst aiItems = $input.all();\n// 👇 Вот здесь в кавычках должно быть точное имя вашей ноды If с холста\nconst ifItems = $('IF').all(); \n\nfor (let i = 0; i < aiItems.length; i++) {\n  try {\n    const aiItem = aiItems[i];\n    const originalData = ifItems[i] ? ifItems[i].json : {};\n\n    let rawText = aiItem.json.text || aiItem.json.output || JSON.stringify(aiItem.json);\n    let cleanString = rawText\n      .replace(/```json/g, '')\n      .replace(/```/g, '')\n      .trim();\n\n    const parsedData = JSON.parse(cleanString);\n\n    outputItems.push({\n      json: {\n        // Забираем оригинальные данные\n        url: originalData.url,\n        title: originalData.title,\n        company: originalData.company,\n        salary: originalData.salary,\n\n        // Добавляем данные от ИИ\n        seniority: parsedData.seniority,\n        key_skills: parsedData.key_skills ? parsedData.key_skills.join(', ') : '',\n        pros: parsedData.pros,\n        cons: parsedData.cons,\n        ai_score: parsedData.ai_score\n      }\n    });\n  } catch (error) {\n    outputItems.push(aiItems[i]);\n  }\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        16,
+        -480
+      ],
+      "id": "2d6242a9-20c7-4b31-b71a-d7ad85c4c83c",
+      "name": "Code S"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Собираем все ссылки и сразу возвращаем их в нужном для Apify формате\nconst allUrls = $input.all().map(item => {\n  let url = item.json.url || item.json.text || item.data;\n  if (typeof url === 'string') {\n    const match = url.match(/https?:\\/\\/[^\\s]+/);\n    url = match ? match[0] : url.trim();\n  }\n  return { url: url };\n}).filter(x => x.url);\n\n// Возвращаем строго один элемент, внутри которого лежит чистый массив startUrls\nreturn [{\n  json: {\n    startUrls: allUrls\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1392,
+        96
+      ],
+      "id": "317e9981-6268-4793-80e8-ce1d9eff22dd",
+      "name": "Code L"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Проанализируй эту вакансию:\nНазвание: {{ $json.title }}\nКомпания: {{ $json.company }}\nОписание: {{ $json.description }}",
+        "options": {
+          "systemMessage": "Ты — опытный карьерный консультант и технический рекрутер. Твоя задача — проанализировать вакансию, в которой НЕ УКАЗАНА заработная плата. \n\nПоскольку денег в открытом доступе нет, тебе нужно тщательно оценить вакансию по косвенным признакам (сложность стека, масштаб задач, требования к опыту, бэкграунд компании), чтобы понять её потенциальную привлекательность и уровень.\n\nВнимательно изучи текст вакансии и верни результат СТРОГО в формате валидного JSON-объекта без каких-либо дополнительных комментариев, вводных слов или маркдаун-оберток (не используй ```json ... ```, отдавай чистый JSON следующим структурам):\n\n{\n  \"seniority\": \"Определи уровень (например: Junior, Middle, Senior, Lead, Middle+)\",\n  \"key_skills\": [\"Список\", \"ключевых\", \"навыков\", \"из\", \"текста\"],\n  \"pros\": \"Главные плюсы вакансии по тексу (интересные задачи, сильный стек, перспективы)\",\n  \"cons\": \"Возможные минусы или риски (например: размытый стек, перегруженные требования для неизвестной компании, отсутствие конкретики по условиям)\",\n  \"ai_score\": (Оцени общую привлекательность вакансии от 1 до 10 по косвенным признакам, где 10 — топовая неопубликованная позиция, а 1 — сомнительная)\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -304,
+        320
+      ],
+      "id": "a7148ff6-8cf9-4fca-bc1f-d3406b9788c8",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Проанализируй эту вакансию:\nНазвание: {{ $json.title }}\nКомпания: {{ $json.company }}\nЗарплата: {{ $json.salary }}\nОписание: {{ $json.description }}",
+        "options": {
+          "systemMessage": "Ты — профессиональный IT-рекрутер и технический фильтр. Твоя задача — проанализировать текст вакансии, оценить её адекватность, определить стек технологий, уровень позиции (Junior/Middle/Senior) и выдать краткое заключение, стоит ли на неё откликаться.\n\nНа вход ты получаешь JSON с данными вакансии.\nВерни ответ строго в формате JSON (без лишнего текста, без маркдаун-оберток вроде ```json, просто чистый JSON-объект) со следующими полями:\nis_relevant: true или false (релевантна ли вакансия для нормального разработчика, нет ли подвоха/спама).\nseniority: уровень позиции (Junior, Middle, Senior, Lead, Unknown).\nkey_skills: массив основных технологий, упомянутых в тексте (например, [\"Node.js\", \"Docker\", \"n8n\"]).\npros: краткие плюсы вакансии (1 предложение на русском).\ncons: скрытые риски или минусы (1 предложение на русском).\nai_score: твоя оценка вакансии от 1 до 10."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -304,
+        -160
+      ],
+      "id": "64bd1fab-9da7-4a1c-a6a8-a7ec9b06022f",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const outputItems = [];\n\nconst aiItems = $input.all();\n// 👇 Убедитесь, что здесь указано точное имя вашей ноды IF с холста\nconst ifItems = $('IF').all();  \n\nfor (let i = 0; i < aiItems.length; i++) {\n  try {\n    const aiItem = aiItems[i];\n    const originalData = ifItems[i] ? ifItems[i].json : {};\n\n    let rawText = aiItem.json.text || aiItem.json.output || JSON.stringify(aiItem.json);\n    let cleanString = rawText\n      .replace(/```json/g, '')\n      .replace(/```/g, '')\n      .trim();\n\n    const parsedData = JSON.parse(cleanString);\n\n    outputItems.push({\n      json: {\n        // Забираем оригинальные данные\n        url: originalData.url,\n        title: originalData.title,\n        company: originalData.company,\n        salary: originalData.salary,\n\n        // Добавляем данные от ИИ\n        seniority: parsedData.seniority,\n        key_skills: parsedData.key_skills ? parsedData.key_skills.join(', ') : '',\n        pros: parsedData.pros,\n        cons: parsedData.cons,\n        ai_score: parsedData.ai_score\n      }\n    });\n  } catch (error) {\n    outputItems.push(aiItems[i]);\n  }\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        -144
+      ],
+      "id": "1869a950-6bdd-444d-9af7-65f7f5d2dbc3",
+      "name": "Code S 2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const outputItems = [];\n\nconst aiItems = $input.all();\n// 👇 Укажите точное имя ноды, которая отделила вакансии без зарплаты (например, 'IF' или 'IF1')\nconst ifItems = $('IF').all();  \n\nfor (let i = 0; i < aiItems.length; i++) {\n  try {\n    const aiItem = aiItems[i];\n    const originalData = ifItems[i] ? ifItems[i].json : {};\n\n    let rawText = aiItem.json.text || aiItem.json.output || JSON.stringify(aiItem.json);\n    let cleanString = rawText\n      .replace(/```json/g, '')\n      .replace(/```/g, '')\n      .trim();\n\n    const parsedData = JSON.parse(cleanString);\n\n    outputItems.push({\n      json: {\n        // Забираем оригинальные данные\n        url: originalData.url,\n        title: originalData.title,\n        company: originalData.company,\n        salary: originalData.salary || 'Не указана',\n\n        // Добавляем данные от ИИ\n        seniority: parsedData.seniority,\n        key_skills: parsedData.key_skills ? parsedData.key_skills.join(', ') : '',\n        pros: parsedData.pros,\n        cons: parsedData.cons,\n        ai_score: parsedData.ai_score\n      }\n    });\n  } catch (error) {\n    outputItems.push(aiItems[i]);\n  }\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        320
+      ],
+      "id": "b785c132-1c07-4adf-98f0-acb2adc0b609",
+      "name": "Code S 3"
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_TELEGRAM_CHAT_ID",
+        "text": "=+ Новая вакансия!\n📌 Должность: {{ $json.title }}\n🏢 Компания: {{ $json.company }}\n🔥 Скиллы : {{ $json.key_skills }}\n💰 Зарплата: {{ $json.salary }}\n⭐ Оценка ИИ: {{ $json.ai_score }}/10 ({{ $json.seniority }})\n\n✅ Плюсы: {{ $json.pros }}\n⚠️ Минусы: {{ $json.cons }}\n\n👉 Ссылка: {{ $json.url }}",
+        "additionalFields": {},
+        "webhookId": null
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        -752
+      ],
+      "id": "43127c0d-10da-4248-bd9f-e103ea8bddb6",
+      "name": "N8N Bot",
+      "webhookId": "REPLACE_WITH_YOUR_WEBHOOK_ID"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        -304,
+        64
+      ],
+      "id": "783ae34b-f1ea-4048-ae27-c954382c18ff",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_N8N_DATA_TABLE_ID",
+          "mode": "list",
+          "cachedResultName": "AI Auto",
+          "cachedResultUrl": "/projects/REPLACE_WITH_N8N_PROJECT_ID/datatables/REPLACE_WITH_N8N_DATA_TABLE_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ai_score": "={{ $json.ai_score }}",
+            "title": "={{ $json.title }}",
+            "seniority": "={{ $json.seniority }}",
+            "pros": "={{ $json.pros }}",
+            "cons": "={{ $json.cons }}",
+            "salary": "={{ $json.salary }}",
+            "url": "={{ $json.url }}",
+            "key_skills": "={{ $json.key_skills }}",
+            "company": "={{ $json.company }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ai_score",
+              "displayName": "ai_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "seniority",
+              "displayName": "seniority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "pros",
+              "displayName": "pros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "cons",
+              "displayName": "cons",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "salary",
+              "displayName": "salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "key_skills",
+              "displayName": "key_skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        -208
+      ],
+      "id": "2acf4565-9a6d-4b14-b764-a4d660b64441",
+      "name": "DATA"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        768,
+        -224
+      ],
+      "id": "1adaa1b3-52c9-4b8a-80df-8177a1d2d0a5",
+      "name": "Saver"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        -304,
+        528
+      ],
+      "id": "b6a7b21d-6ea1-4b5d-8a44-2d12f445f850",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "actorId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_JOHAN_ACTOR_ID",
+          "mode": "id"
+        },
+        "timeout": 300,
+        "memory": 4096
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        -272
+      ],
+      "id": "5805ca1d-09c6-4c91-af21-d7722130cf5b",
+      "name": "Johan",
+      "credentials": {
+        "apifyApi": {
+          "id": null,
+          "name": "Apify account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Data Table": {
+      "main": [
+        [
+          {
+            "node": "Code L",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Klerk": {
+      "main": [
+        [
+          {
+            "node": "Klerk Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Johan Data": {
+      "main": [
+        [
+          {
+            "node": "Data Table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Klerk Data": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code S",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NoInfo": {
+      "main": [
+        [
+          {
+            "node": "Saver",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Low": {
+      "main": [
+        [
+          {
+            "node": "Saver",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "OR": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Johan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TOP": {
+      "main": [
+        [
+          {
+            "node": "Saver",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code S": {
+      "main": [
+        [
+          {
+            "node": "TOP",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "N8N Bot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code L": {
+      "main": [
+        [
+          {
+            "node": "Klerk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Code S 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Code S 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code S 2": {
+      "main": [
+        [
+          {
+            "node": "Low",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code S 3": {
+      "main": [
+        [
+          {
+            "node": "NoInfo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA": {
+      "main": [
+        []
+      ]
+    },
+    "Saver": {
+      "main": [
+        [
+          {
+            "node": "DATA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "N8N Bot": {
+      "main": [
+        []
+      ]
+    },
+    "Johan": {
+      "main": [
+        [
+          {
+            "node": "Johan Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d916c4f3-3fd0-425d-8d41-c8c40226b72b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "REPLACE_WITH_N8N_INSTANCE_ID"
+  },
+  "nodeGroups": [],
+  "id": "REPLACE_WITH_WORKFLOW_ID",
+  "tags": []
+}
